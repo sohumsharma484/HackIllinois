@@ -1,0 +1,5 @@
+
+To udpate:
+sudo dotnet anchorgen -i target/idl/solana_twentyfourtyeight.json -o target/idl/ProgramCode.cs
+Copy what's in ProgramCode.cs to Solana2048Anchor.cs
+Then open in unity and fix changes

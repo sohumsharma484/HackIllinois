@@ -353,9 +353,9 @@ namespace SolanaTwentyfourtyeight
             return await SignAndSendTransaction(instr, feePayer, signingCallback);
         }
 
-        public async Task<RequestResult<string>> SendPushInDirectionAsync(PushInDirectionAccounts accounts, byte direction, byte counter, PublicKey feePayer, Func<byte[], PublicKey, byte[]> signingCallback, PublicKey programId)
+        public async Task<RequestResult<string>> SendPushInDirectionAsync(PushInDirectionAccounts accounts, byte direction, byte counter, byte angle, byte force, PublicKey feePayer, Func<byte[], PublicKey, byte[]> signingCallback, PublicKey programId)
         {
-            Solana.Unity.Rpc.Models.TransactionInstruction instr = Program.SolanaTwentyfourtyeightProgram.PushInDirection(accounts, direction, counter, programId);
+            Solana.Unity.Rpc.Models.TransactionInstruction instr = Program.SolanaTwentyfourtyeightProgram.PushInDirection(accounts, direction, counter, angle, force, programId);
             return await SignAndSendTransaction(instr, feePayer, signingCallback);
         }
 
@@ -575,7 +575,7 @@ namespace SolanaTwentyfourtyeight
                 return new Solana.Unity.Rpc.Models.TransactionInstruction{Keys = keys, ProgramId = programId.KeyBytes, Data = resultData};
             }
 
-            public static Solana.Unity.Rpc.Models.TransactionInstruction PushInDirection(PushInDirectionAccounts accounts, byte direction, byte counter, PublicKey programId)
+            public static Solana.Unity.Rpc.Models.TransactionInstruction PushInDirection(PushInDirectionAccounts accounts, byte direction, byte counter, byte angle, byte force, PublicKey programId)
             {
                 List<Solana.Unity.Rpc.Models.AccountMeta> keys = new()
                 {Solana.Unity.Rpc.Models.AccountMeta.ReadOnly(accounts.SessionToken == null ? programId : accounts.SessionToken, false), Solana.Unity.Rpc.Models.AccountMeta.Writable(accounts.Player, false), Solana.Unity.Rpc.Models.AccountMeta.Writable(accounts.Highscore, false), Solana.Unity.Rpc.Models.AccountMeta.Writable(accounts.Signer, true), Solana.Unity.Rpc.Models.AccountMeta.ReadOnly(accounts.Avatar, false), Solana.Unity.Rpc.Models.AccountMeta.ReadOnly(accounts.SystemProgram, false)};
@@ -586,6 +586,10 @@ namespace SolanaTwentyfourtyeight
                 _data.WriteU8(direction, offset);
                 offset += 1;
                 _data.WriteU8(counter, offset);
+                offset += 1;
+                _data.WriteU8(angle, offset);
+                offset += 1;
+                _data.WriteU8(force, offset);
                 offset += 1;
                 byte[] resultData = new byte[offset];
                 Array.Copy(_data, resultData, offset);
