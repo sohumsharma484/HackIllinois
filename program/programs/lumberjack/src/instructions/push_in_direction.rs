@@ -9,7 +9,7 @@ pub use crate::errors::Solana2048Error;
     ctx.accounts.player.authority.key() == ctx.accounts.signer.key(),
     Solana2048Error::WrongAuthority
 )]
-pub fn push_in_direction(mut ctx: Context<PushInDirection>, direction: u8, _counter: u8) -> Result<()> {
+pub fn push_in_direction(mut ctx: Context<PushInDirection>, direction: u8, _counter: u8, angle: u8) -> Result<()> {
     let account = &mut ctx.accounts;
     let result = account.player.board.push(direction);
     account.player.score += result.0;

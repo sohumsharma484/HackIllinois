@@ -100,8 +100,9 @@ pub mod solana_twentyfourtyeight {
         ctx: Context<PushInDirection>,
         direction: u8,
         counter: u8,
+        angle: u8,
     ) -> Result<()> {
-        instructions::push_in_direction(ctx, direction, counter)
+        instructions::push_in_direction(ctx, direction, counter, angle)
     }
 
     pub fn restart(ctx: Context<Restart>) -> Result<()> {
