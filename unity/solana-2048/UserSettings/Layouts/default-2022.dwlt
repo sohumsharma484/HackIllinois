@@ -233,12 +233,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
     x: 0
+
     y: 669
     width: 1357
     height: 374
@@ -392,8 +393,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: bc6a0000
+    m_LastClickedInstanceID: 27324
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c623000074970000029900006c630000f85d000000000000
     m_RenameOverlay:
@@ -1043,6 +1044,7 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
 --- !u!114 &17
+>>>>>>> origin/Andrew
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}

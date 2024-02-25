@@ -18,6 +18,7 @@ public class BoardManager : MonoBehaviour
     public const int WIDTH = 4;
     public const int HEIGHT = 4;
 
+
     public Tile TilePrefab; 
     public Cell CellPrefab; 
     public Cell[,] AllCells = new Cell[4, 4];
@@ -263,7 +264,7 @@ public class BoardManager : MonoBehaviour
             {
                 transform.rotation = currentRotation;
                 transform.DORotateQuaternion(endValue, 0.3f);
-                Solana2048Service.Instance.PushInDirection(true, 0);
+                Solana2048Service.Instance.PushInDirection(true, 0, 0, 0);
                 DirectionIndicator.SetDirection(Vector2Int.right);
             }
         }
@@ -275,7 +276,7 @@ public class BoardManager : MonoBehaviour
             {
                 transform.rotation = currentRotation;
                 transform.DORotateQuaternion(endValue, 0.3f);
-                Solana2048Service.Instance.PushInDirection(true, 1);
+                Solana2048Service.Instance.PushInDirection(true, 1, 0, 0);
                 DirectionIndicator.SetDirection(Vector2Int.down);
             }
         }
@@ -289,7 +290,7 @@ public class BoardManager : MonoBehaviour
                 transform.rotation = currentRotation;
                 transform.DORotateQuaternion(endValue, 0.3f);
 
-                Solana2048Service.Instance.PushInDirection(true, 2);
+                Solana2048Service.Instance.PushInDirection(true, 2, 0, 0);
                 DirectionIndicator.SetDirection(Vector2Int.left);
             }
         }
@@ -303,7 +304,7 @@ public class BoardManager : MonoBehaviour
                 transform.rotation = currentRotation;
                 transform.DORotateQuaternion(endValue, 0.3f);
                 
-                Solana2048Service.Instance.PushInDirection(true, 3);
+                Solana2048Service.Instance.PushInDirection(true, 3, 0, 0);
                 DirectionIndicator.SetDirection(Vector2Int.up);
             }
         }

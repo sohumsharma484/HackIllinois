@@ -1,3 +1,4 @@
+
 pub mod state;
 use anchor_lang::prelude::*;
 use anchor_lang::solana_program::native_token::LAMPORTS_PER_SOL;
@@ -100,8 +101,10 @@ pub mod solana_twentyfourtyeight {
         ctx: Context<PushInDirection>,
         direction: u8,
         counter: u8,
+        angle: u8,
+        force: u8,
     ) -> Result<()> {
-        instructions::push_in_direction(ctx, direction, counter)
+        instructions::push_in_direction(ctx, direction, counter, angle, force)
     }
 
     pub fn restart(ctx: Context<Restart>) -> Result<()> {

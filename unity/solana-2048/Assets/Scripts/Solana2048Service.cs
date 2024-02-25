@@ -558,7 +558,7 @@ public class Solana2048Service : MonoBehaviour
         return sessionWallet;
     }
 
-    public async void PushInDirection(bool useSession, byte direction)
+    public async void PushInDirection(bool useSession, byte direction, byte angle, byte force)
     {
         var tx = new Transaction()
         {
@@ -582,7 +582,7 @@ public class Solana2048Service : MonoBehaviour
             tx.FeePayer = sessionWallet.Account.PublicKey;
             accounts.SessionToken = sessionWallet.SessionTokenPDA;
             accounts.Signer = sessionWallet.Account.PublicKey;
-            var pushInDirectionInstruction = SolanaTwentyfourtyeightProgram.PushInDirection(accounts, direction, (byte) blockBump ,Solana_2048_ProgramIdPubKey);
+            var pushInDirectionInstruction = SolanaTwentyfourtyeightProgram.PushInDirection(accounts, direction, (byte) blockBump, (byte) angle, (byte) force, Solana_2048_ProgramIdPubKey);
             tx.Add(pushInDirectionInstruction);
             Debug.Log("Has session -> sign and send session wallet");
             WalletBase walletToUse = sessionWallet;

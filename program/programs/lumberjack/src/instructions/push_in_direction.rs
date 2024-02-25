@@ -1,3 +1,4 @@
+
 //! Instruction: Push in direction
 use crate::PlayerData;
 use anchor_lang::prelude::*;
@@ -5,24 +6,62 @@ use anchor_lang::prelude::*;
 use session_keys::{SessionError, SessionToken, session_auth_or, Session};
 pub use crate::errors::Solana2048Error;
 
+// use rand::Rng;
+
 #[session_auth_or(
     ctx.accounts.player.authority.key() == ctx.accounts.signer.key(),
     Solana2048Error::WrongAuthority
 )]
-pub fn push_in_direction(mut ctx: Context<PushInDirection>, direction: u8, _counter: u8) -> Result<()> {
+pub fn push_in_direction(mut ctx: Context<PushInDirection>, direction: u8, _counter: u8, angle: u8, force: u8) -> Result<()> {
     let account = &mut ctx.accounts;
-    let result = account.player.board.push(direction);
-    account.player.score += result.0;
+    // let result = account.player.board.push(direction);
+    // account.player.score += result.0;
+
+    // Physics 
+    // 50 m from shot to target
+    // fx is left and right, fy is up down, fz is to target
+    let fx = force as f64 * (direction as f64).cos();
+    let fz = force as f64 * (direction as f64).sin();
+    let fy = force as f64 * (angle as f64).sin();
+
+    let time: f64 = (50 as f64)/(fz as f64);
+    let deltax = fx * time;
+    let deltay = fy * time + 0.5 * -9.8 * time * time;
+
+    // Need to set x and y depending on starting pos
+    let dist = ((account.player.new_tile_x as f64 - (50 as f64 + deltax)).powf(2.0) + (account.player.new_tile_y as f64 - (1 as f64 + deltay)).powf(2.0)).sqrt();
+    // Current error radius of 10
+    // let mut rng = rand::thread_rng();
+    account.player.hit_y = (1 as f64 + deltay) as i32;
+    account.player.hit_x = (50 as f64 + deltax) as i32;
+    if (account.player.hit_y > 30 || account.player.hit_y < 0 || account.player.hit_x < 0 || account.player.hit_x > 60) {
+        account.player.hit_y = -1;
+        account.player.hit_x = -1;
+        account.player.game_over = true;
+    } 
+    if (dist <= 10.0) {
+        account.player.score += 1;
+        account.player.game_over = false;
+        // account.player.new_tile_x = rng.gen_range(5.0..55.0);
+        // account.player.new_tile_y = rng.gen_range(5.0..25.0);
+        let clock = Clock::get()?;
+        let clock = clock.unix_timestamp % 10;
+        account.player.new_tile_x = ((clock % 50 + 5) as f64) as i32;
+        account.player.new_tile_y = ((clock % 20 + 5) as f64) as i32;
+    } else {
+        account.player.game_over = true;
+    }
+
 
     save_highscore(&mut account.highscore, &mut account.player, &mut account.avatar.key());            
 
     //account.player.moved = result.1; // Probably not needed
-    account.player.game_over = result.2;
-    account.player.direction = direction;
-    account.player.new_tile_x = result.3;
-    account.player.new_tile_y = result.4;
-    account.player.new_tile_level = result.5;
-    msg!("Yo move tile moved:{} gamover:{} x:{} y:{} level:{}", result.1, result.2, result.3, result.4, result.5);
+    // account.player.game_over = result.2;
+    // account.player.direction = direction;
+    // account.player.new_tile_x = result.3;
+    // account.player.new_tile_z = result.4;
+    // account.player.new_tile_level = result.5;
+    // msg!("Yo move tile moved:{} gamover:{} x:{} y:{} level:{}", result.1, result.2, result.3, result.4, result.5);
     Ok(())
 }   
 
