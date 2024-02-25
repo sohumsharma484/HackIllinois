@@ -7,7 +7,7 @@ use anchor_lang::InstructionData;
 use instructions::*;
 pub mod instructions;
 
-declare_id!("HN3ujuEqqAWCwiUR7q9xgKUv2tNqVYaeSKeTPs2e5pHv");
+declare_id!("FraPqyV8kpJuezPRGUmJLKfZfggQz2wWvGznHFGpZ3pw");
 
 #[error_code]
 pub enum GameErrorCode {
