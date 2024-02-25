@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,17 +12,23 @@ public class HICannon : MonoBehaviour {
 
     public float force = 50f;
 
-    private void Start() {
+    private void Awake() {
         instance = this;
     }
 
     // Update is called once per frame
     void Update() {
         Vector2 inputVector = gameInput.GetRotationVector();
-        Vector3 rotDir = new Vector3(inputVector.x, inputVector.y, 0f) * rotateSpeed * Time.deltaTime;
+        Vector3 rotDir = new Vector3(0f, inputVector.x, inputVector.y) * rotateSpeed * Time.deltaTime;
         Vector3 playerRot = transform.rotation.eulerAngles;
         playerRot += rotDir;
         playerRot = Quaternion.Euler(playerRot).eulerAngles;
+        // Bounding
+        if (playerRot.y < 180f && playerRot.y> 90f) { playerRot.y = 180f; }
+        if (playerRot.y < 90f) { playerRot.y = 360f; }
+        if (playerRot.z >270f) { playerRot.z = 0f; }
+        if (playerRot.z > 50f) { playerRot.z = 50f; }
+
         transform.rotation = Quaternion.Euler(playerRot);
 
         float inputForce = gameInput.GetForce();

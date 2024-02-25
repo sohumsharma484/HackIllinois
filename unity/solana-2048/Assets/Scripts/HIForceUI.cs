@@ -9,12 +9,12 @@ public class HIForceUI : MonoBehaviour {
 
     [SerializeField] private TextMeshProUGUI text;
 
-    private void Start() {
+    private void Awake() {
         instance = this;
     }
 
     public void SetText(float f) {
         int force = (int)Mathf.Round(f);
-        text.text = "Force: " + force;
+        text.text = "Force: " + (int) Mathf.Round(HICannon.instance.force);
     }
 }

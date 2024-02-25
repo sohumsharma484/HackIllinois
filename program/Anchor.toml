@@ -1,6 +1,7 @@
 [features]
 seeds = false
 [programs.localnet]
+
 solana-2048 = "FraPqyV8kpJuezPRGUmJLKfZfggQz2wWvGznHFGpZ3pw"
 
 [registry]
@@ -8,6 +9,7 @@ url = "https://anchor.projectserum.com"
 
 [provider]
 cluster = "devnet"
+
 wallet = "/home/sohum/.config/solana/id.json"
 
 [scripts]

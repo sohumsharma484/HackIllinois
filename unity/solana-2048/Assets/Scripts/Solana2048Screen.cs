@@ -157,7 +157,7 @@ public class Solana2048Screen : MonoBehaviour
         await Web3.Instance.LoginWalletAdapter();
     }
 
-    private async void OnEditorLoginClicked()
+    private async void OnEditorLoginClicked() // ENTERY POINT FOR ACC
     {
         Web3.Instance.rpcCluster = RpcCluster.DevNet;
         Web3.Instance.customRpc = EditortRpc;

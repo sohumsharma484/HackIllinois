@@ -7,6 +7,7 @@ use anchor_lang::InstructionData;
 use instructions::*;
 pub mod instructions;
 
+
 declare_id!("FraPqyV8kpJuezPRGUmJLKfZfggQz2wWvGznHFGpZ3pw");
 
 #[error_code]

@@ -17,27 +17,37 @@ pub fn push_in_direction(mut ctx: Context<PushInDirection>, direction: u8, _coun
     // let result = account.player.board.push(direction);
     // account.player.score += result.0;
 
+    let direction2 = direction as f64 * 3.14159265358979 / 180.0;
+    let angle2 = angle as f64 * 3.14159265358979 / 180.0;
+
+    if (account.player.new_tile_x > 1000) {
+        account.player.new_tile_x = 30;
+        account.player.new_tile_y = 15;
+    }
+
     // Physics 
     // 50 m from shot to target
     // fx is left and right, fy is up down, fz is to target
-    let fx = force as f64 * (direction as f64).cos();
-    let fz = force as f64 * (direction as f64).sin();
-    let fy = force as f64 * (angle as f64).sin();
+    let fx = force as f64 * (direction2 as f64).cos();
+    let fz = force as f64 * (direction2 as f64).sin();
+    let fy = force as f64 * (angle2 as f64).sin();
 
     let time: f64 = (50 as f64)/(fz as f64);
     let deltax = fx * time;
     let deltay = fy * time + 0.5 * -9.8 * time * time;
 
     // Need to set x and y depending on starting pos
-    let dist = ((account.player.new_tile_x as f64 - (50 as f64 + deltax)).powf(2.0) + (account.player.new_tile_y as f64 - (1 as f64 + deltay)).powf(2.0)).sqrt();
+    let dist = ((account.player.new_tile_x as f64 - (30 as f64 + deltax)).powf(2.0) + (account.player.new_tile_y as f64 - (0 as f64 + deltay)).powf(2.0)).sqrt();
     // Current error radius of 10
     // let mut rng = rand::thread_rng();
-    account.player.hit_y = (1 as f64 + deltay) as i32;
-    account.player.hit_x = (50 as f64 + deltax) as i32;
+    account.player.top_tile = dist as u32; // DEBUGGING
+    account.player.hit_y = (0 as f64 + deltay) as i32;
+    account.player.hit_x = (30 as f64 + deltax) as i32;
     if (account.player.hit_y > 30 || account.player.hit_y < 0 || account.player.hit_x < 0 || account.player.hit_x > 60) {
         account.player.hit_y = -1;
         account.player.hit_x = -1;
         account.player.game_over = true;
+        account.player.score = 0;
     } 
     if (dist <= 10.0) {
         account.player.score += 1;
@@ -45,11 +55,12 @@ pub fn push_in_direction(mut ctx: Context<PushInDirection>, direction: u8, _coun
         // account.player.new_tile_x = rng.gen_range(5.0..55.0);
         // account.player.new_tile_y = rng.gen_range(5.0..25.0);
         let clock = Clock::get()?;
-        let clock = clock.unix_timestamp % 10;
+        let clock = clock.unix_timestamp;
         account.player.new_tile_x = ((clock % 50 + 5) as f64) as i32;
         account.player.new_tile_y = ((clock % 20 + 5) as f64) as i32;
     } else {
         account.player.game_over = true;
+        account.player.score = 0;
     }
 
 

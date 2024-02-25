@@ -28,6 +28,8 @@ using UnityEngine.Networking;
 
 public class Solana2048Service : MonoBehaviour
 {
+    public event EventHandler OnFireFinish;
+
     public static PublicKey Solana_2048_ProgramIdPubKey = new PublicKey("FraPqyV8kpJuezPRGUmJLKfZfggQz2wWvGznHFGpZ3pw");
     public static PublicKey ClientDevWallet = new PublicKey("CYg2vSJdujzEC1E7kHMzB9QhjiPLRdsAa4Js7MkuXfYq");
 
@@ -326,7 +328,7 @@ public class Solana2048Service : MonoBehaviour
         Debug.Log("Current average socket response time: " + average);
     }
     
-    private async void SubscribeToPlayerAccountViaSocket()
+    private async void SubscribeToPlayerAccountViaSocket() // REPURPOSE
     {
         ServiceFactory.Resolve<SolPlayWebSocketService>().SubscribeToPubKeyData(Instance.PricePoolPDA,
             result =>
@@ -341,8 +343,17 @@ public class Solana2048Service : MonoBehaviour
             socketResponseTimes.Insert(0, timeBetweenRequestAnResponse);
             socketResponseTimes = socketResponseTimes.Take(10).ToList();
             PrintAverageResponseTime();
-                
+
+            Debug.Log("LOOK HERE!!!!!!!!!!!!!!");
             var playerData = PlayerData.Deserialize(Convert.FromBase64String(result.result.value.data[0]));
+            HICannonball.instance.SetPos(playerData.HitX, playerData.HitY);
+            HITargetBoard.instance.moveTarget(playerData.NewTileX, playerData.NewTileY);
+            Debug.Log(playerData.NewTileX);
+            Debug.Log(playerData.NewTileY);
+            Debug.Log(playerData.TopTile);
+
+            OnFireFinish?.Invoke(this, EventArgs.Empty);
+
             CurrentPlayerData = playerData;
             ServiceFactory.Resolve<NftService>().UpdateScoreForSelectedNFt(CurrentPlayerData);
             Debug.Log(
@@ -357,8 +368,6 @@ public class Solana2048Service : MonoBehaviour
                     grid += "-" + playerData.Board.Data[i][j];
                 }
             }
-
-            Debug.Log(grid);
         });
         
         var res = await Web3.Wallet.GetBalance(Instance.PricePoolPDA);
@@ -370,7 +379,7 @@ public class Solana2048Service : MonoBehaviour
         return _isInitialized;
     }
 
-    public async Task SubscribeToPlayerDataUpdates()
+    public async Task SubscribeToPlayerDataUpdates() // REPURPOSE
     {
         var selectedNft = ServiceFactory.Resolve<NftService>().SelectedNft;
         PublicKey.TryFindProgramAddress(new[]
@@ -503,7 +512,7 @@ public class Solana2048Service : MonoBehaviour
         
         var sessionToken = SessionToken.Deserialize(Convert.FromBase64String(sessionTokenData.Value.Data[0]));
         
-        Debug.Log("Session token valid until: " + (new DateTime(1970, 1, 1)).AddSeconds(sessionToken.ValidUntil) + " Now: " + DateTimeOffset.UtcNow);
+        // Debug.Log("Session token valid until: " + (new DateTime(1970, 1, 1)).AddSeconds(sessionToken.ValidUntil) + " Now: " + DateTimeOffset.UtcNow);
         sessionValidUntil = sessionToken.ValidUntil;
         return sessionToken.ValidUntil > DateTimeOffset.UtcNow.ToUnixTimeSeconds();
     }
@@ -560,6 +569,9 @@ public class Solana2048Service : MonoBehaviour
 
     public async void PushInDirection(bool useSession, byte direction, byte angle, byte force)
     {
+        Debug.Log(Web3.Account);
+        Debug.Log(new List<TransactionInstruction>());
+        Debug.Log(cachedBlockHash);
         var tx = new Transaction()
         {
             FeePayer = Web3.Account,

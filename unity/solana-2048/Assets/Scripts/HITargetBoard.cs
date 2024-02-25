@@ -7,7 +7,7 @@ public class HITargetBoard : MonoBehaviour {
 
     [SerializeField] HITarget target;
 
-    private void Start() {
+    private void Awake() {
         instance = this;
     }
 
