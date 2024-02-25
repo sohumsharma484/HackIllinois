@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\super\\OneDrive\\Documents\\GitHub\\HackIllinois\\unity\\solana-2048\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{50ABFC6D-2213-88A4-BC87-71D255975BB0}|Assembly-CSharp.csproj|c:\\users\\super\\onedrive\\documents\\github\\hackillinois\\unity\\solana-2048\\assets\\scripts\\boardmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{50ABFC6D-2213-88A4-BC87-71D255975BB0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\boardmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{50ABFC6D-2213-88A4-BC87-71D255975BB0}|Assembly-CSharp.csproj|c:\\users\\super\\onedrive\\documents\\github\\hackillinois\\unity\\solana-2048\\assets\\scripts\\higameinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{50ABFC6D-2213-88A4-BC87-71D255975BB0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\higameinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -34,11 +38,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
+              "Title": "BoardManager.cs",
+              "DocumentMoniker": "C:\\Users\\super\\OneDrive\\Documents\\GitHub\\HackIllinois\\unity\\solana-2048\\Assets\\Scripts\\BoardManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\BoardManager.cs",
+              "ToolTip": "C:\\Users\\super\\OneDrive\\Documents\\GitHub\\HackIllinois\\unity\\solana-2048\\Assets\\Scripts\\BoardManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\BoardManager.cs",
+              "ViewState": "AQIAAC4AAAAAAAAAAAAkwEoAAABOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-25T06:44:05.379Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "HICannon.cs",
               "DocumentMoniker": "C:\\Users\\super\\OneDrive\\Documents\\GitHub\\HackIllinois\\unity\\solana-2048\\Assets\\Scripts\\HICannon.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\HICannon.cs",
@@ -50,20 +67,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "HIGameInput.cs",
               "DocumentMoniker": "C:\\Users\\super\\OneDrive\\Documents\\GitHub\\HackIllinois\\unity\\solana-2048\\Assets\\Scripts\\HIGameInput.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\HIGameInput.cs",
               "ToolTip": "C:\\Users\\super\\OneDrive\\Documents\\GitHub\\HackIllinois\\unity\\solana-2048\\Assets\\Scripts\\HIGameInput.cs",
               "RelativeToolTip": "Assets\\Scripts\\HIGameInput.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAYwBIAAAAYAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-25T04:41:49.172Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "HIForceUI.cs",
               "DocumentMoniker": "C:\\Users\\super\\OneDrive\\Documents\\GitHub\\HackIllinois\\unity\\solana-2048\\Assets\\Scripts\\HIForceUI.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\HIForceUI.cs",
@@ -75,7 +92,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "HITarget.cs",
               "DocumentMoniker": "C:\\Users\\super\\OneDrive\\Documents\\GitHub\\HackIllinois\\unity\\solana-2048\\Assets\\Scripts\\HITarget.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\HITarget.cs",
@@ -87,7 +104,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "HITargetBoard.cs",
               "DocumentMoniker": "C:\\Users\\super\\OneDrive\\Documents\\GitHub\\HackIllinois\\unity\\solana-2048\\Assets\\Scripts\\HITargetBoard.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\HITargetBoard.cs",
@@ -99,7 +116,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "HIBackboard.cs",
               "DocumentMoniker": "C:\\Users\\super\\OneDrive\\Documents\\GitHub\\HackIllinois\\unity\\solana-2048\\Assets\\Scripts\\HIBackboard.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\HIBackboard.cs",

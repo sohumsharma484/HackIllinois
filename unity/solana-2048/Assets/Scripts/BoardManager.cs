@@ -56,6 +56,8 @@ public class BoardManager : MonoBehaviour
         Solana2048Service.OnPlayerDataChanged += OnPlayerDataChange;
         Solana2048Service.OnGameReset += OnGameReset;
 
+        HIGameInput.instance.OnFire += HIGameInput_OnFire;
+
         // Crete Cells
         for (int i = 0; i < WIDTH; i++)
         {
@@ -67,6 +69,10 @@ public class BoardManager : MonoBehaviour
                 AllCells[j,i] = cellInstance;
             } 
         }
+    }
+
+    private void HIGameInput_OnFire(object sender, System.EventArgs e) {
+        Solana2048Service.Instance.PushInDirection(true, 0, 0, 0); // FIX THIS
     }
 
     private void OnDestroy()

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class HIGameInput : MonoBehaviour {
 
+    public static HIGameInput instance {  get; private set; }
+
     public event EventHandler OnFire;
 
     private bool wait;
