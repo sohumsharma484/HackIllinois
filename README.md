@@ -9,6 +9,7 @@ This game was started from a fork of Solana 2048 which was started from the game
 These are the Solana2048 Setup Docs (with which this repo shares all dependencies):
 
 -----------------------------------------------------------------------------------
+This game was started from the games template lumberjack: https://github.com/solana-developers/solana-game-starter-kits/tree/main/lumberjack
 
 You can try out a deployed demo here: https://solplay.de/solana-2048/
 
