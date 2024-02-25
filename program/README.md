@@ -1,4 +1,3 @@
-
 # Anchor Solana Program
 
 ```shell
