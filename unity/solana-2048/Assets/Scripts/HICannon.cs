@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class HICannon : MonoBehaviour {
 
     public float force = 50f;
 
-    private void Start() {
+    private void Awake() {
         instance = this;
     }
 

@@ -5,20 +5,29 @@ using UnityEngine;
 
 public class HIGameInput : MonoBehaviour {
 
-    public static HIGameInput instance {  get; private set; }
-
     public event EventHandler OnFire;
 
-    private bool wait;
+    public static HIGameInput instance { get; private set; }
+
+    private bool wait = false;
+
+    private void Awake() {
+        instance = this;
+    }
 
     private void Start() {
-        
+
     }
 
     private void Update() {
-        if (Input.GetKey(KeyCode.KeypadEnter) && !wait) {
+        if (Input.GetKey(KeyCode.F) && !wait) {
+            Debug.Log("Fired OnFire");
             OnFire?.Invoke(this, EventArgs.Empty);
             wait = true;
+        }
+
+        if (Input.GetKey(KeyCode.R)) {
+            wait = false;
         }
     }
 

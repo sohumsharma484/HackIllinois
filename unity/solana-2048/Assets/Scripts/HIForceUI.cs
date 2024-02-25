@@ -9,7 +9,7 @@ public class HIForceUI : MonoBehaviour {
 
     [SerializeField] private TextMeshProUGUI text;
 
-    private void Start() {
+    private void Awake() {
         instance = this;
     }
 

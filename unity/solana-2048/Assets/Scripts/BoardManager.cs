@@ -58,6 +58,8 @@ public class BoardManager : MonoBehaviour
 
         HIGameInput.instance.OnFire += HIGameInput_OnFire;
 
+        Debug.Log("Board Manager");
+
         // Crete Cells
         for (int i = 0; i < WIDTH; i++)
         {
@@ -72,6 +74,7 @@ public class BoardManager : MonoBehaviour
     }
 
     private void HIGameInput_OnFire(object sender, System.EventArgs e) {
+        Debug.Log("Listener for OnFire Triggered");
         Solana2048Service.Instance.PushInDirection(true, 0, 0, 0); // FIX THIS
     }
 
