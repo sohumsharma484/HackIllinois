@@ -39,15 +39,19 @@ namespace SolanaTwentyfourtyeight
 
             public uint TopTile { get; set; }
 
-            public byte NewTileX { get; set; }
+            public int NewTileX { get; set; }
 
-            public byte NewTileY { get; set; }
+            public int NewTileY { get; set; }
 
             public uint NewTileLevel { get; set; }
 
             public uint Xp { get; set; }
 
             public uint Level { get; set; }
+
+            public int HitX { get; set; }
+
+            public int HitY { get; set; }
 
             public static PlayerData Deserialize(ReadOnlySpan<byte> _data)
             {
@@ -72,15 +76,19 @@ namespace SolanaTwentyfourtyeight
                 offset += 1;
                 result.TopTile = _data.GetU32(offset);
                 offset += 4;
-                result.NewTileX = _data.GetU8(offset);
-                offset += 1;
-                result.NewTileY = _data.GetU8(offset);
-                offset += 1;
+                result.NewTileX = _data.GetS32(offset);
+                offset += 4;
+                result.NewTileY = _data.GetS32(offset);
+                offset += 4;
                 result.NewTileLevel = _data.GetU32(offset);
                 offset += 4;
                 result.Xp = _data.GetU32(offset);
                 offset += 4;
                 result.Level = _data.GetU32(offset);
+                offset += 4;
+                result.HitX = _data.GetS32(offset);
+                offset += 4;
+                result.HitY = _data.GetS32(offset);
                 offset += 4;
                 return result;
             }

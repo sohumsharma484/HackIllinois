@@ -43,11 +43,13 @@ pub struct PlayerData {
     pub game_over: bool,
     pub direction: u8,
     pub top_tile: u32,
-    pub new_tile_x: u8, 
-    pub new_tile_y: u8,
+    pub new_tile_x: i32, 
+    pub new_tile_y: i32,
     pub new_tile_level: u32,
     pub xp: u32,
     pub level: u32,
+    pub hit_x: i32,
+    pub hit_y: i32,
 }
 
 #[derive(Accounts)]
