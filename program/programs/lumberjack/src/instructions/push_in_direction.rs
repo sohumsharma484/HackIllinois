@@ -20,6 +20,11 @@ pub fn push_in_direction(mut ctx: Context<PushInDirection>, direction: u8, _coun
     let direction2 = direction as f64 * 3.14159265358979 / 180.0;
     let angle2 = angle as f64 * 3.14159265358979 / 180.0;
 
+    if (account.player.new_tile_x > 1000) {
+        account.player.new_tile_x = 30;
+        account.player.new_tile_y = 15;
+    }
+
     // Physics 
     // 50 m from shot to target
     // fx is left and right, fy is up down, fz is to target
@@ -42,6 +47,7 @@ pub fn push_in_direction(mut ctx: Context<PushInDirection>, direction: u8, _coun
         account.player.hit_y = -1;
         account.player.hit_x = -1;
         account.player.game_over = true;
+        account.player.score = 0;
     } 
     if (dist <= 10.0) {
         account.player.score += 1;
@@ -49,11 +55,12 @@ pub fn push_in_direction(mut ctx: Context<PushInDirection>, direction: u8, _coun
         // account.player.new_tile_x = rng.gen_range(5.0..55.0);
         // account.player.new_tile_y = rng.gen_range(5.0..25.0);
         let clock = Clock::get()?;
-        let clock = clock.unix_timestamp % 10;
+        let clock = clock.unix_timestamp;
         account.player.new_tile_x = ((clock % 50 + 5) as f64) as i32;
         account.player.new_tile_y = ((clock % 20 + 5) as f64) as i32;
     } else {
         account.player.game_over = true;
+        account.player.score = 0;
     }
 
 

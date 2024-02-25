@@ -28,6 +28,8 @@ using UnityEngine.Networking;
 
 public class Solana2048Service : MonoBehaviour
 {
+    public event EventHandler OnFireFinish;
+
     public static PublicKey Solana_2048_ProgramIdPubKey = new PublicKey("HN3ujuEqqAWCwiUR7q9xgKUv2tNqVYaeSKeTPs2e5pHv");
     public static PublicKey ClientDevWallet = new PublicKey("CYg2vSJdujzEC1E7kHMzB9QhjiPLRdsAa4Js7MkuXfYq");
 
@@ -350,7 +352,7 @@ public class Solana2048Service : MonoBehaviour
             Debug.Log(playerData.NewTileY);
             Debug.Log(playerData.TopTile);
 
-
+            OnFireFinish?.Invoke(this, EventArgs.Empty);
 
             CurrentPlayerData = playerData;
             ServiceFactory.Resolve<NftService>().UpdateScoreForSelectedNFt(CurrentPlayerData);
@@ -366,8 +368,6 @@ public class Solana2048Service : MonoBehaviour
                     grid += "-" + playerData.Board.Data[i][j];
                 }
             }
-
-            Debug.Log(grid);
         });
         
         var res = await Web3.Wallet.GetBalance(Instance.PricePoolPDA);

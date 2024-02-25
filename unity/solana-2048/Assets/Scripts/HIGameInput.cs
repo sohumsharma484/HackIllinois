@@ -16,7 +16,12 @@ public class HIGameInput : MonoBehaviour {
     }
 
     private void Start() {
+        Solana2048Service.Instance.OnFireFinish += SolanaService_OnFireFinish;
+    }
 
+    private void SolanaService_OnFireFinish(object sender, EventArgs e) {
+        Debug.Log("NO LONGER WAITING FOR RESPONSE, CAN FIRE AGAIN");
+        wait = false;
     }
 
     private void Update() {
