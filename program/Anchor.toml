@@ -1,14 +1,14 @@
 [features]
 seeds = false
 [programs.localnet]
-solana-2048 = "HN3ujuEqqAWCwiUR7q9xgKUv2tNqVYaeSKeTPs2e5pHv"
+solana-2048 = "FraPqyV8kpJuezPRGUmJLKfZfggQz2wWvGznHFGpZ3pw"
 
 [registry]
 url = "https://anchor.projectserum.com"
 
 [provider]
 cluster = "devnet"
-wallet = "/home/epicac/.config/solana/id.json"
+wallet = "/home/sohum/.config/solana/id.json"
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
