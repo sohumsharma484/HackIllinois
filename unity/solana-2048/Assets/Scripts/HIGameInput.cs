@@ -1,8 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HIGameInput : MonoBehaviour {
+
+    public event EventHandler OnFire;
+
+    private void Start() {
+        
+    }
+
+    private void Update() {
+        if (Input.GetKey(KeyCode.KeypadEnter)) {
+            OnFire?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
     public Vector2 GetRotationVector() {
         Vector2 inputVector = new Vector2(0, 0);
 

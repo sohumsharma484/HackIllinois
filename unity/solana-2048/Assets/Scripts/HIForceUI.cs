@@ -15,6 +15,6 @@ public class HIForceUI : MonoBehaviour {
 
     public void SetText(float f) {
         int force = (int)Mathf.Round(f);
-        text.text = "Force: " + force;
+        text.text = "Force: " + HICannon.instance.force;
     }
 }
