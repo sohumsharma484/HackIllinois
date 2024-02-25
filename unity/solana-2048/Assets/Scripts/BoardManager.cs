@@ -215,22 +215,26 @@ public class BoardManager : MonoBehaviour
             cachedInput = null;
             return;
         }
-        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D))
+        if (Input.GetKeyUp(KeyCode.Return))
         {
             cachedInput = Vector2Int.right;
         }
-        if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.S))
-        {
-            cachedInput = Vector2Int.down;
-        }
-        if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A))
-        {
-            cachedInput = Vector2Int.left;
-        }
-        if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W)) 
-        {
-            cachedInput = Vector2Int.up;
-        }
+        // if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D))
+        // {
+        //     cachedInput = Vector2Int.right;
+        // }
+        // if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.S))
+        // {
+        //     cachedInput = Vector2Int.down;
+        // }
+        // if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A))
+        // {
+        //     cachedInput = Vector2Int.left;
+        // }
+        // if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W)) 
+        // {
+        //     cachedInput = Vector2Int.up;
+        // }
         if (Solana2048Service.Instance == null || IsWaiting)
         {
             return;
@@ -254,19 +258,19 @@ public class BoardManager : MonoBehaviour
             return;
         }
         
-        var endValue = Quaternion.Euler(0,0, 0);
-        var currentRotation = transform.rotation;
+        // var endValue = Quaternion.Euler(0,0, 0);
+        // var currentRotation = transform.rotation;
         if (cachedInput == Vector2Int.right)
         {
-            endValue =Quaternion.Euler(0,0, -1);
-            transform.rotation = endValue;
-            if (Move(Vector2Int.right, WIDTH - 2, -1, 0, 1))
-            {
+            // endValue =Quaternion.Euler(0,0, -1);
+            // transform.rotation = endValue;
+            // if (Move(Vector2Int.right, WIDTH - 2, -1, 0, 1))
+            // {
                 transform.rotation = currentRotation;
                 transform.DORotateQuaternion(endValue, 0.3f);
-                Solana2048Service.Instance.PushInDirection(true, 0, 0, 0);
+                Solana2048Service.Instance.PushInDirection(true, (byte) Mathf.Round(HICannon.instance.transform.rotation.eulerAngles.y), (byte) (Mathf.Round(HICannon.instance.transform.rotation.eulerAngles.x)*-1), (byte) Mathf.Round(HICannon.instance.force));
                 DirectionIndicator.SetDirection(Vector2Int.right);
-            }
+            // }
         }
         if (cachedInput == Vector2Int.down)
         {
