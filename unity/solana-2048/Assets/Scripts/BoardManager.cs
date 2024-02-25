@@ -74,8 +74,12 @@ public class BoardManager : MonoBehaviour
     }
 
     private void HIGameInput_OnFire(object sender, System.EventArgs e) {
-        Debug.Log("Listener for OnFire Triggered");
-        Solana2048Service.Instance.PushInDirection(true, 0, 0, 0); // FIX THIS
+        Debug.Log("Theta: " + (360 - Mathf.Round(HICannon.instance.transform.rotation.eulerAngles.y)) + " Phi: " + (Mathf.Round(HICannon.instance.transform.rotation.eulerAngles.z)) + " Force: " + Mathf.Round(HICannon.instance.force));
+        Solana2048Service.Instance.PushInDirection(true, 
+            (byte)(360 - Mathf.Round(HICannon.instance.transform.rotation.eulerAngles.y)), // correct theta
+            (byte)(Mathf.Round(HICannon.instance.transform.rotation.eulerAngles.z)), // correct phi
+            (byte)Mathf.Round(HICannon.instance.force) // correct force
+        );
     }
 
     private void OnDestroy()
@@ -152,6 +156,7 @@ public class BoardManager : MonoBehaviour
 
         SetBackgroundImageOfHighestTile();
         
+        /* HI
         SocketMessageTimeout = null;
         DirectionIndicator.SetDirection(null);
         if (anyTileOutOfSync)
@@ -159,6 +164,7 @@ public class BoardManager : MonoBehaviour
             RefreshFromPlayerdata(playerData);
             return;
         }
+        */
         
         IsWaiting = false;
 
@@ -200,13 +206,14 @@ public class BoardManager : MonoBehaviour
     {
         // This is just here bcause there is currently no way to figure out if a wallet transaction was rejected and 
         // Then the tasks hang, so to make sure all accounts are initialized we wait a bit...
+        /*
         if (Solana2048Service.Instance.IsRequestTimeoutActive())
         {
             cachedInput = null;
             TouchInputHandler.InputState = null;
             return;
         }
-
+        
         TouchInputHandler.OnUpdate();
         if (SocketMessageTimeout != null && SocketMessageTimeout + TimeSpan.FromSeconds(5) < DateTime.UtcNow)
         {
@@ -274,7 +281,7 @@ public class BoardManager : MonoBehaviour
                 transform.rotation = currentRotation;
                 transform.DORotateQuaternion(endValue, 0.3f);
                 Solana2048Service.Instance.PushInDirection(true, 0, 0, 0);
-                DirectionIndicator.SetDirection(Vector2Int.right);
+                //DirectionIndicator.SetDirection(Vector2Int.right);
             }
         }
         if (cachedInput == Vector2Int.down)
@@ -286,7 +293,7 @@ public class BoardManager : MonoBehaviour
                 transform.rotation = currentRotation;
                 transform.DORotateQuaternion(endValue, 0.3f);
                 Solana2048Service.Instance.PushInDirection(true, 1, 0, 0);
-                DirectionIndicator.SetDirection(Vector2Int.down);
+                //DirectionIndicator.SetDirection(Vector2Int.down);
             }
         }
         if (cachedInput == Vector2Int.left)
@@ -300,7 +307,7 @@ public class BoardManager : MonoBehaviour
                 transform.DORotateQuaternion(endValue, 0.3f);
 
                 Solana2048Service.Instance.PushInDirection(true, 2, 0, 0);
-                DirectionIndicator.SetDirection(Vector2Int.left);
+                //DirectionIndicator.SetDirection(Vector2Int.left);
             }
         }
         if (cachedInput == Vector2Int.up)
@@ -314,11 +321,12 @@ public class BoardManager : MonoBehaviour
                 transform.DORotateQuaternion(endValue, 0.3f);
                 
                 Solana2048Service.Instance.PushInDirection(true, 3, 0, 0);
-                DirectionIndicator.SetDirection(Vector2Int.up);
+                //DirectionIndicator.SetDirection(Vector2Int.up);
             }
         }
 
         cachedInput = null;
+        */
     }
 
     public Cell GetCell(int x, int y)
@@ -482,6 +490,11 @@ public class BoardManager : MonoBehaviour
                 }
             } 
         }
+        playerData.NewTileX = 30;
+        playerData.NewTileY = 15;
+        HITargetBoard.instance.moveTarget(30f, 15f);
+        playerData.GameOver = false;
+        playerData.Score = 0;
     }
 
     private void SpawnNewTile(int i, int j, uint number, Color? overrideColor = null)
