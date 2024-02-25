@@ -7,13 +7,16 @@ public class HIGameInput : MonoBehaviour {
 
     public event EventHandler OnFire;
 
+    private bool wait;
+
     private void Start() {
         
     }
 
     private void Update() {
-        if (Input.GetKey(KeyCode.KeypadEnter)) {
+        if (Input.GetKey(KeyCode.KeypadEnter) && !wait) {
             OnFire?.Invoke(this, EventArgs.Empty);
+            wait = true;
         }
     }
 
