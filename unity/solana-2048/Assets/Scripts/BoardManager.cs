@@ -18,6 +18,7 @@ public class BoardManager : MonoBehaviour
     public const int WIDTH = 4;
     public const int HEIGHT = 4;
 
+
     public Tile TilePrefab; 
     public Cell CellPrefab; 
     public Cell[,] AllCells = new Cell[4, 4];

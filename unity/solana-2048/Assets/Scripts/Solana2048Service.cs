@@ -28,7 +28,7 @@ using UnityEngine.Networking;
 
 public class Solana2048Service : MonoBehaviour
 {
-    public static PublicKey Solana_2048_ProgramIdPubKey = new PublicKey("FraPqyV8kpJuezPRGUmJLKfZfggQz2wWvGznHFGpZ3pw");
+    public static PublicKey Solana_2048_ProgramIdPubKey = new PublicKey("HN3ujuEqqAWCwiUR7q9xgKUv2tNqVYaeSKeTPs2e5pHv");
     public static PublicKey ClientDevWallet = new PublicKey("CYg2vSJdujzEC1E7kHMzB9QhjiPLRdsAa4Js7MkuXfYq");
 
     public static Solana2048Service Instance { get; private set; }
